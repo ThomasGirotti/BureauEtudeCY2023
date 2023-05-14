@@ -19,18 +19,13 @@ Le programme comprend 1 fichier :
 ### Technologies 
 ***
 Liste des technologies utilisées pour le projet :  
- - [gnuplot](http://gnuplot.info): Version 5.4  
- - stdlib.h  
- - string.h  
- - stdio.h  
+ - [gnuplot](http://gnuplot.info)  
+ - [GLS](https://www.gnu.org/software/gsl/)  
 ***
 ### Installation 
 ***
 Vérifier que vous possédez bien les technologies utiliser par le programme.  
-Vous pouvez utiliser les commande suivante dans votre terminal pour les installer :  
-> sudo apt-get install libc6-dev  
-> sudo apt install gnuplot  
-  
+Si vous ne les possédez pas, vous pouvez les installer dans la section "Technologies"
 Pour récupérer les fichiers de GitLab, télechargez-les ou ouvrez votre terminal dans le dossier d'installation taper la commande suivante dans le terminal :  
 > git clone https://github.com/ThomasGirotti/BureauEtudeCY2023.git  
 ***
