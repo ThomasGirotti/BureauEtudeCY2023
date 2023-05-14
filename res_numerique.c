@@ -34,7 +34,7 @@ double champEt(double theta,double r,double moment){
 /* Pour les équipotentielles */
 void equipotentielleDAT(double x0,double y0,double moment) {
     FILE *FichierDAT; //Création des variables
-    FichierDAT = fopen("Ressources/equipotentielle.dat", "w");
+    FichierDAT = fopen("Ressources/potentiel.dat", "w");
     double theta;
     double r;
     double x,y;
@@ -131,7 +131,7 @@ int main(int argc, char *argv[]){
     case 1: //Affichage selon l'approximation dipolaire
         gnuplotPipe = popen ("gnuplot -persistent", "w");
         fprintf(gnuplotPipe,"load 'Ressources/script_champ.gp'\n");
-        fprintf(gnuplotPipe,"load 'Ressources/script_equipotentielles.gp'\n");
+        fprintf(gnuplotPipe,"load 'Ressources/script_potentiel.gp'\n");
         fprintf(gnuplotPipe,"load 'Ressources/script_modelisation.gp'\n");
         fprintf(gnuplotPipe,"exit\n");
         printf("\nLes graphes ont été fabriqués\n");
