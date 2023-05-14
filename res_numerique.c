@@ -7,7 +7,6 @@
 #define EPSIL0 8.845187 * pow(10,-12)
 
 /* CALCUL DES VARIABLES */
-
 /* Equipotentielle */
 double equipotentielle(double theta,double r,double moment) {
     double V;
@@ -32,10 +31,9 @@ double champEt(double theta,double r,double moment){
 /* FIN CALCUL DES VARIABLES */
 
 /* CREATION DES FICHIERS .DAT POUR GNUPLOT */
-
 /* Pour les équipotentielles */
 void equippointdat(double x0,double y0,double moment) {
-    FILE *FichierDAT;
+    FILE *FichierDAT; //Création des variables
     FichierDAT = fopen("Ressources/equipotentielle.dat", "w");
     double theta;
     double r;
@@ -88,8 +86,8 @@ void champpointdat(double x0,double y0,double moment) {
 
     for (int i = 0; i < max; i++) {
         for(int j=0;j < max;j++){
-            milieu = max/2; //Initialisation des variables en fonction de i et j
-            x = i-milieu;
+            milieu = max/2; //Initialisation des variables en fonction de i et j et passage en coordonnées cartésiennes
+            x = i-milieu; 
             y = j-milieu;
 
             r = sqrt((x - x0) * (x - x0) + (y - y0) * (y - y0));
@@ -112,13 +110,12 @@ void champpointdat(double x0,double y0,double moment) {
     }
     fclose(FichierDAT);
 }
-
 /* FIN CREATION DES FICHIERS .DAT POUR GNUPLOT */
 
-/* La fonction main affichera la représentation en utilisant gnuplot */
+/* La fonction main affichera la représentation du dipôle éléctrostatique en utilisant gnuplot */
 int main(int argc, char *argv[]){
     /* Création des variables */
-    FILE * gnuplotPipe;
+    FILE * gnuplotPipe; //fichier qui executera les commandes gnuplot
     int mode;
     
     /* On demande à l'utilisateur quel mode il veut */
