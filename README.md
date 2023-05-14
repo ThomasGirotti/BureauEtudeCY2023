@@ -29,7 +29,7 @@ Vérifier que vous possédez bien les technologies utiliser par le programme.
 Si vous ne les possédez pas, vous pouvez les retrouver dans la section "Technologies"
 Pour récupérer les fichiers de GitLab, télechargez-les ou ouvrez votre terminal dans le dossier d'installation taper la commande suivante dans le terminal :  
 > git clone https://github.com/ThomasGirotti/BureauEtudeCY2023.git  
-Puis compilez-le et executez-le :
-> gcc res_numerique.c -o NomProgramme
-> ./NomProgramme
+Puis compilez-le et executez-le :  
+> gcc res_numerique.c -o NomProgramme  
+> ./NomProgramme  
 ***
