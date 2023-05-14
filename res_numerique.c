@@ -122,7 +122,7 @@ int main(int argc, char *argv[]){
     printf("\n-- PROGRAMME DE MODELISATION --\n\n");
     printf("1 : Avec l'Approximation Dipolaire\n");
     printf("2 : Le Cas Général\n");
-    printf("Veuillez choisir un mode (1 ou 2):\n);
+    printf("Veuillez choisir un mode (1 ou 2):\n");
     printf("Entrez le mode voulu (1 ou 2): ");
 
     scanf("%d",&mode); //Récuperation du mode voulu
