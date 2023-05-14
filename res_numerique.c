@@ -32,7 +32,7 @@ double champEt(double theta,double r,double moment){
 
 /* CREATION DES FICHIERS .DAT POUR GNUPLOT */
 /* Pour les équipotentielles */
-void equippointdat(double x0,double y0,double moment) {
+void equipotentielleDAT(double x0,double y0,double moment) {
     FILE *FichierDAT; //Création des variables
     FichierDAT = fopen("Ressources/equipotentielle.dat", "w");
     double theta;
@@ -72,7 +72,7 @@ void equippointdat(double x0,double y0,double moment) {
 }
 
 /* Pour le champ */
-void champpointdat(double x0,double y0,double moment) {
+void champDAT(double x0,double y0,double moment) {
     FILE *FichierDAT; //Création des variables
     FichierDAT = fopen("Ressources/champ.dat", "w");
     double theta;
@@ -124,8 +124,8 @@ int main(int argc, char *argv[]){
     printf("2 : Le Cas Général\n");
     printf("Veuillez choisir un mode (1 ou 2):\n"); 
     scanf("%d",&mode); //Récuperation du mode voulu dans la variable 'mode'
-    champpointdat(0,0,1); //Initialisation des fichiers 'dat' pour gnuplot
-    equippointdat(0,0,1);
+    champDAT(0,0,1); //Initialisation des fichiers 'dat' pour gnuplot
+    equipotentielleDAT(0,0,1);
     /* Selon le mode choisi par l'utilisateur */
     switch (mode){
     case 1: //Affichage selon l'approximation dipolaire
