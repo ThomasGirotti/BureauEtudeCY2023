@@ -1,0 +1,25 @@
+# Définition des constantes et paramètres
+
+
+# Configuration du graphique
+set autoscale x
+set autoscale y
+
+# Tracé de la carte de chaleur
+
+set palette defined (-1 "blue", 0 "white", 1 "red")
+
+set title "Carte 3D du potentiel exacte"
+set size ratio -1
+set terminal pdf
+set output"champ_electrique_vecteur2.pdf"
+set nokey
+
+# Tracé de la carte de chaleur
+splot "electric_potential_data.txt" using ($1):($2):($3) with pm3d title "Carte de chaleur du potentiel électrique"
+
+# Tracé des équipotentielles
+unset surface
+unset pm3d
+set contour
+splot "electric_potential_data.txt" using ($1):($2):($3) with lines lc "black" lw 1 title "Équipotentielles"
