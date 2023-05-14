@@ -12,6 +12,8 @@ set xrange [-5:5]
 set yrange [-5:5]
 set size square
 
+# Tracé de la carte de chaleur
+
 set palette defined (-1 "blue", 0 "white", 1 "red")
 
 # Tracé de la carte de chaleur
