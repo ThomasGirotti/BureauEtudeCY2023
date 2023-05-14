@@ -33,6 +33,6 @@ Pour récupérer les fichiers de GitLab, télechargez-les ou ouvrez votre termin
 Puis compilez-le :  
 > gcc res_numerique.c -o NomProgramme  
 
-Pour finir, vous pouvez l'éxecutez :
+Pour finir, vous pouvez l'exécutez :
 > ./NomProgramme  
 ***
