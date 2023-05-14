@@ -27,16 +27,17 @@ double equipotentielle(double theta,double r,double moment) {
     V = (moment * cos(theta))/(4 * PI * r * r * EPSIL0);
     return V;
 }
+/* FIN CALCUL DES VARIABLES */
 
 /* CREATION DES FICHIERS .DAT POUR GNUPLOT */
 /* Pour le champ */
 void champpointdat(double x0,double y0,double moment) {
-    FILE *fp; //Création des variables
-    fp = fopen("Ressources/champ.dat", "w");
+    FILE *FichierDAT; //Création des variables
+    FichierDAT = fopen("Ressources/champ.dat", "w");
     double theta;
     double r;
     double x,y;
-    double mid,max;
+    double milieu,max;
     double stock;
     double Ex,Ey;
 
@@ -44,9 +45,9 @@ void champpointdat(double x0,double y0,double moment) {
 
     for (int i = 0; i < max; i++) {
         for(int j=0;j < max;j++){
-            mid = max/2; //Initialisation des variables en fonction de i et j
-            x = i-mid;
-            y = j-mid;
+            milieu = max/2; //Initialisation des variables en fonction de i et j
+            x = i-milieu;
+            y = j-milieu;
 
             r = sqrt((x - x0) * (x - x0) + (y - y0) * (y - y0));
 
@@ -59,31 +60,31 @@ void champpointdat(double x0,double y0,double moment) {
             Ey = (Ey)/(sqrt(stock*stock + Ey*Ey));
             
             //On écrit les valeurs dans le .dat selon la position (i,j)
-            if((i==mid)&&(j==mid)){ //Si on est au milieu
-                fprintf(fp,"0 0 INF INF \n");
+            if((i==milieu)&&(j==milieu)){ //Si on est au milieu
+                FichierDATrintf(FichierDAT,"0 0 INF INF \n");
             }else{ //Sinon
-                fprintf(fp, "%g %g %g %g\n",x,y,Ex,Ey);
+                FichierDATrintf(FichierDAT, "%g %g %g %g\n",x,y,Ex,Ey);
             }
         }
     }
-    fclose(fp);
+    fclose(FichierDAT);
 }
 
 /* Pour les équipotentielles */
 void equippointdat(double x0,double y0,double moment) {
-    FILE *fp;
-    fp = fopen("Ressources/equipotentielle.dat", "w");
+    FILE *FichierDAT;
+    FichierDAT = fopen("Ressources/equipotentielle.dat", "w");
     double theta;
     double r;
     double x,y;
-    double mid,max;
+    double milieu,max;
     double V;
 
     max = 0.001;
-    mid = max/2;
+    milieu = max/2;
 
-    for (double i = -mid; i <  mid;i += 0.00001){
-        for(double j= -mid;j <  mid;j += 0.00001){
+    for (double i = -milieu; i <  milieu;i += 0.00001){
+        for(double j= -milieu;j <  milieu;j += 0.00001){
             //Initialisation des variables en fonction de i et j
             x = i;
             y = j;
@@ -99,19 +100,20 @@ void equippointdat(double x0,double y0,double moment) {
             V = equipotentielle(theta,r,moment);
             
             //On écrit les valeurs dans le .dat selon la position (i,j)
-            if((i==mid)&&(j==mid)){ //Si on est au milieu
-                fprintf(fp,"0 0 INF\n");
+            if((i==milieu)&&(j==milieu)){ //Si on est au milieu
+                FichierDATrintf(FichierDAT,"0 0 INF\n");
             }else{ //Sinon
-                fprintf(fp, "%g %g %g \n",x,y,V);
+                FichierDATrintf(FichierDAT, "%g %g %g \n",x,y,V);
             }
         }
     }
-    fclose(fp);
+    fclose(FichierDAT);
 }
+/* FIN CREATION DES FICHIERS .DAT POUR GNUPLOT */
 
 /* La fonction main affichera la représentation en utilisant gnuplot */
 int main(int argc, char *argv[]){
-    /* Créationd des variables */
+    /* Création des variables */
     FILE * gnuplotPipe;
     int mode;
     
@@ -130,18 +132,19 @@ int main(int argc, char *argv[]){
     switch (mode){
     case 1: //Affichage selon l'approximation dipolaire
         gnuplotPipe = popen ("gnuplot -persistent", "w");
-        fprintf(gnuplotPipe,"load 'Ressources/script_champ.gp'\n");
-        fprintf(gnuplotPipe,"load 'Ressources/script_equipotentielles.gp'\n");
-        fprintf(gnuplotPipe,"load 'Ressources/script_modelisation.gp'\n");
-        fprintf(gnuplotPipe,"exit\n");
-        printf("\nLes graphes de l'approximation dipolaire ont été correctement générés !\n");
+        FichierDATrintf(gnuplotPipe,"load 'Ressources/script_champ.gp'\n");
+        FichierDATrintf(gnuplotPipe,"load 'Ressources/script_equipotentielles.gp'\n");
+        FichierDATrintf(gnuplotPipe,"load 'Ressources/script_modelisation.gp'\n");
+        FichierDATrintf(gnuplotPipe,"exit\n");
+        printf("\nLes graphes ont été fabriqués\n");
         break;
     case 2:
-        printf("ERREUR : MODE 2 NON FINALISE\n");
-        return 2;
+        gnuplotPipe = popen ("gnuplot -persistent", "w");
+        FichierDATrintf(gnuplotPipe,"exit\n");
+        printf("\nLes graphes ont été fabriqués\n");
         break; 
     default:
-        printf("ERREUR : MODE DE SELECTION INVALIDE\n");
+        printf("ERREUR MODE: CE MODE N'EXISTE PAS (VEUILLEZ CHOISIR ENTRE 1 ET 2)\n");
         return 1;
         break;
     }
