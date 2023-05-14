@@ -1,5 +1,5 @@
 # BureauEtudeCY2023
-# La météo de Hugo 
+# Résolution Numériques
 ***
 Schemann Hugo, Girotti Thomas, Deletoile Lilian
 ***
