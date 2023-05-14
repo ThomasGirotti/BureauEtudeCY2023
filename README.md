@@ -13,8 +13,9 @@ Ce programme permet de representer un dipôle électrostatique.
 ***
 ### Info générales 
 ***
-Le programme comprend 1 fichier :  
+Le programme comprend 1 fichier et 1 dossier:  
  - main.c : le programme contenant l'ensemble des fonctions.  
+ - Ressources : Contient les ressources nécessaires pour l'affichage des graphiques sur gnuplot.
 ***
 ### Technologies 
 ***
@@ -25,7 +26,10 @@ Liste des technologies utilisées pour le projet :
 ### Installation 
 ***
 Vérifier que vous possédez bien les technologies utiliser par le programme.  
-Si vous ne les possédez pas, vous pouvez les installer dans la section "Technologies"
+Si vous ne les possédez pas, vous pouvez les retrouver dans la section "Technologies"
 Pour récupérer les fichiers de GitLab, télechargez-les ou ouvrez votre terminal dans le dossier d'installation taper la commande suivante dans le terminal :  
 > git clone https://github.com/ThomasGirotti/BureauEtudeCY2023.git  
+Puis compilez-le et executez-le :
+> gcc res_numerique.c -o NomProgramme
+> ./NomProgramme
 ***
