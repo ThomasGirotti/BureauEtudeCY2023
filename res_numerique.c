@@ -122,10 +122,8 @@ int main(int argc, char *argv[]){
     printf("\n-- PROGRAMME DE MODELISATION --\n\n");
     printf("1 : Avec l'Approximation Dipolaire\n");
     printf("2 : Le Cas Général\n");
-    printf("Veuillez choisir un mode (1 ou 2):\n");
-    printf("Entrez le mode voulu (1 ou 2): ");
-
-    scanf("%d",&mode); //Récuperation du mode voulu
+    printf("Veuillez choisir un mode (1 ou 2):\n"); 
+    scanf("%d",&mode); //Récuperation du mode voulu dans la variable 'mode'
     champpointdat(0,0,1); //Initialisation des fichiers 'dat' pour gnuplot
     equippointdat(0,0,1);
     /* Selon le mode choisi par l'utilisateur */
