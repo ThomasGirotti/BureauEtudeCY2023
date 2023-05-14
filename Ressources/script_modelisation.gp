@@ -3,9 +3,9 @@ set key
 set size ratio -1
 set xrange [-5:5]
 set yrange [-5:5]
-set xlabel "coordonnées x"
-set ylabel "coordonnées y"
-set title "Modélisation des lignes de champ et des équipotentielles dans l'approximation dipolaire"
+set xlabel "x (en mètres)"
+set xlabel "y (en mètres)"
+set title "Modélisation des lignes de champ et des équipotentielles dans l'approximation dipolaire" font ",10"
 set terminal pdf
 set output "ldc_equipotentielle.pdf"
 
