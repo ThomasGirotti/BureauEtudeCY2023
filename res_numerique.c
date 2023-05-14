@@ -112,19 +112,18 @@ void champpointdat(double x0,double y0,double moment) {
 }
 /* FIN CREATION DES FICHIERS .DAT POUR GNUPLOT */
 
-/* La fonction main affichera la représentation du dipôle éléctrostatique en utilisant gnuplot */
+/* La fonction main affichera la représentation du champ electrique en utilisant gnuplot */
 int main(int argc, char *argv[]){
     /* Création des variables */
     FILE * gnuplotPipe; //fichier qui executera les commandes gnuplot
     int mode;
     
-    /* On demande à l'utilisateur quel mode il veut */
-    printf("\nBienvenue dans le programme de modelisation de champ electrique !\n");
-    printf("Ce programme vous permettra de modeliser le champ electrique d'un dipole ou d'un ensemble de charges ponctuelles.\n");
-    printf("Dans quel cas souhaitez vous vous situez ?\n\n");
-    printf("1 : Approximation Dipolaire\n");
-    printf("2 : Cas Général\n");
-    printf("Entrez le mode voulu : ");
+    //INTERFACE GRAPHIQUE
+    printf("\n-- PROGRAMME DE MODELISATION --\n\n");
+    printf("1 : Avec l'Approximation Dipolaire\n");
+    printf("2 : Le Cas Général\n");
+    printf("Veuillez choisir un mode (1 ou 2):\n);
+    printf("Entrez le mode voulu (1 ou 2): ");
 
     scanf("%d",&mode); //Récuperation du mode voulu
     champpointdat(0,0,1); //Initialisation des fichiers 'dat' pour gnuplot
@@ -145,9 +144,11 @@ int main(int argc, char *argv[]){
         printf("\nLes graphes ont été fabriqués\n");
         break; 
     default:
-        printf("ERREUR MODE: CE MODE N'EXISTE PAS (VEUILLEZ CHOISIR ENTRE 1 ET 2)\n");
+        printf("ERREUR MODE: CE MODE N'EXISTE PAS\n");
+        printf("\n-- FERMETURE DU PROGRAMME SUITE A UNE ERREUR --\n")
         return 1;
         break;
     }
+    printf("\n-- FIN DU PROGRAMME --\n")
     return 0;
 }
