@@ -7,68 +7,31 @@
 #define EPSIL0 8.845187 * pow(10,-12)
 
 /* CALCUL DES VARIABLES */
+
+/* Equipotentielle */
+double equipotentielle(double theta,double r,double moment) {
+    double V;
+    V = (moment * cos(theta)) / (4 * PI * r * r * EPSIL0);
+    return V;
+}
+
 /* Champ en fonction de l'axe Er */
 double champEr(double theta,double r,double moment){
     double Er;
-    Er = (2*moment*cos(theta))/(4*PI*r*r*r*EPSIL0);
+    Er = (2 * moment * cos(theta)) / (4 * PI * r * r * r * EPSIL0);
     return Er;
 }
 
 /* Champ en fonction de l'axe Et */
 double champEt(double theta,double r,double moment){
     double Et;
-    Et = (moment*sin(theta))/(4*PI*r*r*r*EPSIL0);
+    Et = (moment * sin(theta)) / (4 * PI * r * r * r * EPSIL0);
     return Et;
 }
 
-/* Equipotentielle */
-double equipotentielle(double theta,double r,double moment) {
-    double V;
-    V = (moment * cos(theta))/(4 * PI * r * r * EPSIL0);
-    return V;
-}
 /* FIN CALCUL DES VARIABLES */
 
 /* CREATION DES FICHIERS .DAT POUR GNUPLOT */
-/* Pour le champ */
-void champpointdat(double x0,double y0,double moment) {
-    FILE *FichierDAT; //Création des variables
-    FichierDAT = fopen("Ressources/champ.dat", "w");
-    double theta;
-    double r;
-    double x,y;
-    double milieu,max;
-    double stock;
-    double Ex,Ey;
-
-    max = 30;
-
-    for (int i = 0; i < max; i++) {
-        for(int j=0;j < max;j++){
-            milieu = max/2; //Initialisation des variables en fonction de i et j
-            x = i-milieu;
-            y = j-milieu;
-
-            r = sqrt((x - x0) * (x - x0) + (y - y0) * (y - y0));
-
-            theta = atan2(y - y0, x - x0);
-
-            Ex = champEr(theta,r,moment) * cos(theta) - champEt(theta,r,moment) * sin(theta);
-            Ey = champEr(theta,r,moment) * sin(theta) + champEt(theta,r,moment) * cos(theta);
-            stock = Ex;
-            Ex = (Ex)/(sqrt(Ex*Ex + Ey*Ey));
-            Ey = (Ey)/(sqrt(stock*stock + Ey*Ey));
-            
-            //On écrit les valeurs dans le .dat selon la position (i,j)
-            if((i==milieu)&&(j==milieu)){ //Si on est au milieu
-                FichierDATrintf(FichierDAT,"0 0 INF INF \n");
-            }else{ //Sinon
-                FichierDATrintf(FichierDAT, "%g %g %g %g\n",x,y,Ex,Ey);
-            }
-        }
-    }
-    fclose(FichierDAT);
-}
 
 /* Pour les équipotentielles */
 void equippointdat(double x0,double y0,double moment) {
@@ -101,14 +64,55 @@ void equippointdat(double x0,double y0,double moment) {
             
             //On écrit les valeurs dans le .dat selon la position (i,j)
             if((i==milieu)&&(j==milieu)){ //Si on est au milieu
-                FichierDATrintf(FichierDAT,"0 0 INF\n");
+                fprintf(FichierDAT,"0 0 INF\n");
             }else{ //Sinon
-                FichierDATrintf(FichierDAT, "%g %g %g \n",x,y,V);
+                fprintf(FichierDAT, "%g %g %g \n",x,y,V);
             }
         }
     }
     fclose(FichierDAT);
 }
+
+/* Pour le champ */
+void champpointdat(double x0,double y0,double moment) {
+    FILE *FichierDAT; //Création des variables
+    FichierDAT = fopen("Ressources/champ.dat", "w");
+    double theta;
+    double r;
+    double x,y;
+    double milieu,max;
+    double stock;
+    double Ex,Ey;
+
+    max = 30;
+
+    for (int i = 0; i < max; i++) {
+        for(int j=0;j < max;j++){
+            milieu = max/2; //Initialisation des variables en fonction de i et j
+            x = i-milieu;
+            y = j-milieu;
+
+            r = sqrt((x - x0) * (x - x0) + (y - y0) * (y - y0));
+
+            theta = atan2(y - y0, x - x0);
+
+            Ex = champEr(theta,r,moment) * cos(theta) - champEt(theta,r,moment) * sin(theta);
+            Ey = champEr(theta,r,moment) * sin(theta) + champEt(theta,r,moment) * cos(theta);
+            stock = Ex;
+            Ex = (Ex)/(sqrt(Ex*Ex + Ey*Ey));
+            Ey = (Ey)/(sqrt(stock*stock + Ey*Ey));
+            
+            //On écrit les valeurs dans le .dat selon la position (i,j)
+            if((i==milieu)&&(j==milieu)){ //Si on est au milieu
+                fprintf(FichierDAT,"0 0 INF INF \n");
+            }else{ //Sinon
+                fprintf(FichierDAT, "%g %g %g %g\n",x,y,Ex,Ey);
+            }
+        }
+    }
+    fclose(FichierDAT);
+}
+
 /* FIN CREATION DES FICHIERS .DAT POUR GNUPLOT */
 
 /* La fonction main affichera la représentation en utilisant gnuplot */
@@ -132,15 +136,15 @@ int main(int argc, char *argv[]){
     switch (mode){
     case 1: //Affichage selon l'approximation dipolaire
         gnuplotPipe = popen ("gnuplot -persistent", "w");
-        FichierDATrintf(gnuplotPipe,"load 'Ressources/script_champ.gp'\n");
-        FichierDATrintf(gnuplotPipe,"load 'Ressources/script_equipotentielles.gp'\n");
-        FichierDATrintf(gnuplotPipe,"load 'Ressources/script_modelisation.gp'\n");
-        FichierDATrintf(gnuplotPipe,"exit\n");
+        fprintf(gnuplotPipe,"load 'Ressources/script_champ.gp'\n");
+        fprintf(gnuplotPipe,"load 'Ressources/script_equipotentielles.gp'\n");
+        fprintf(gnuplotPipe,"load 'Ressources/script_modelisation.gp'\n");
+        fprintf(gnuplotPipe,"exit\n");
         printf("\nLes graphes ont été fabriqués\n");
         break;
     case 2:
         gnuplotPipe = popen ("gnuplot -persistent", "w");
-        FichierDATrintf(gnuplotPipe,"exit\n");
+        fprintf(gnuplotPipe,"exit\n");
         printf("\nLes graphes ont été fabriqués\n");
         break; 
     default:
