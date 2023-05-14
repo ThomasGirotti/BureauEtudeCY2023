@@ -121,7 +121,7 @@ int main(int argc, char *argv[]){
     //INTERFACE GRAPHIQUE
     printf("\n-- PROGRAMME DE MODELISATION --\n\n");
     printf("1 : Avec l'Approximation Dipolaire\n");
-    printf("2 : Le Cas Général\n");
+    printf("2 : Avec l'Expression exacte\n");
     printf("Veuillez choisir un mode (1 ou 2):\n"); 
     scanf("%d",&mode); //Récuperation du mode voulu dans la variable 'mode'
     champDAT(0,0,1); //Initialisation des fichiers 'dat' pour gnuplot
